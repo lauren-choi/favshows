@@ -1,0 +1,1 @@
+// Maps each product from App.js to an HTML element or component for render
