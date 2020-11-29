@@ -12,7 +12,8 @@ export default class FilteredList extends React.Component {
     this.state = {
       type: "All",
       location: "All",
-      sortState: "Select"
+      sortState: "Select",
+      total: 0
     }
   }
 
@@ -84,8 +85,6 @@ export default class FilteredList extends React.Component {
     this.props.list.sort((a, b) => a.intensity - b.intensity)
   }
 
-
-
   render() {
     return (
       <div>
@@ -106,9 +105,9 @@ export default class FilteredList extends React.Component {
           <Dropdown.Item eventKey="ascending" onSelect={this.onSelectSorting}>Lowest to Highest</Dropdown.Item>
           <Dropdown.Item eventKey="descending" onSelect={this.onSelectSorting}>Highest to Lowest</Dropdown.Item>
         </DropdownButton>
-        <DisplayList list={this.props.list.filter(this.applyFilters).sort(
-          (a, b) => this.state.sortState === "ascending" ? this.sortAscending(a, b) : this.sortDescending(a, b))}/>
-        <AggregateList list={this.props.list} />
+        {/* <DisplayList list={this.props.list.filter(this.applyFilters).sort(
+          (a, b) => this.state.sortState === "ascending" ? this.sortAscending(a, b) : this.sortDescending(a, b))}/> */}
+        <AggregateList list={this.props.list}/>
       </div>
     );
   }

@@ -10,12 +10,15 @@ export default class AggregateItem extends React.Component {
     this.state = {
       hours: 0
     }
+    this.onSelectIncrease = this.onSelectIncrease.bind(this);
+    this.onSelectDecrease = this.onSelectDecrease.bind(this);
   }
 
   onSelectIncrease = event => {
     this.setState({
       hours: this.state.hours + 1
     });
+    this.props.addTotal();
   }
 
   onSelectDecrease = event => {
@@ -23,6 +26,7 @@ export default class AggregateItem extends React.Component {
       this.setState({
         hours: this.state.hours - 1
       });
+      this.props.subtractTotal();
     }
   }
 
@@ -31,15 +35,15 @@ export default class AggregateItem extends React.Component {
       <div>
         <Card style ={{ width: '15rem' }}>
           <Card.Body>
-            <Card.Title>{this.props.name}</Card.Title>
+            <Card.Title>{this.props.item.name}</Card.Title>
             <Card.Text>
-              Activity type: {this.props.type}
+              Activity type: {this.props.item.type}
             </Card.Text>
             <Card.Text>
-              Location: {this.props.location}
+              Location: {this.props.item.location}
             </Card.Text>
             <Card.Text>
-              Intensity level: {this.props.intensity}
+              Intensity level: {this.props.item.intensity}
             </Card.Text>
             <ButtonToolbar style={{ border: 'light', width: '10rem' }}>
               <Button variant="outline-secondary" onClick={() => this.onSelectDecrease()}>-</Button>
