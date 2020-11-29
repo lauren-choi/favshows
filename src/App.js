@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { act } from "react-dom/test-utils";
 import './App.css';
 import DisplayList from './DisplayList';
