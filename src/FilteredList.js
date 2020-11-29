@@ -3,6 +3,7 @@ import Nav from 'react-bootstrap/Nav';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import DisplayList from './DisplayList';
+import AggregateList from './AggregateList';
 
 export default class FilteredList extends React.Component {
 
@@ -83,6 +84,8 @@ export default class FilteredList extends React.Component {
     this.props.list.sort((a, b) => a.intensity - b.intensity)
   }
 
+
+
   render() {
     return (
       <div>
@@ -105,6 +108,7 @@ export default class FilteredList extends React.Component {
         </DropdownButton>
         <DisplayList list={this.props.list.filter(this.applyFilters).sort(
           (a, b) => this.state.sortState === "ascending" ? this.sortAscending(a, b) : this.sortDescending(a, b))}/>
+        <AggregateList list={this.props.list} />
       </div>
     );
   }
