@@ -1,8 +1,5 @@
 import React from 'react'; 
 import AggregateItem from './AggregateItem';
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 
 export default class AggregateList extends React.Component {
 

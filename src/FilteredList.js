@@ -13,7 +13,8 @@ export default class FilteredList extends React.Component {
       type: "All",
       location: "All",
       sortState: "Select",
-      total: 0
+      total: 0,
+      tempList: [...this.props.list]
     }
   }
 
@@ -77,13 +78,15 @@ export default class FilteredList extends React.Component {
     })
   };
 
-  sortAscending = (a, b) => {
-    this.props.list.sort((a, b) => b.intensity - a.intensity)
-  }
-
-  sortDescending = (a, b) => {
-    this.props.list.sort((a, b) => a.intensity - b.intensity)
-  }
+  sortList = (a, b) => {
+    if(this.state.sortState === "ascending") { 
+      this.state.tempList.sort((a, b) => a.intensity - b.intensity)
+    } else if (this.state.sortState === "descending") {
+      this.state.tempList.sort((a, b) => b.intensity - a.intensity)
+    } else {
+      this.state.tempList = [...this.props.list]
+    }
+  }  
 
   render() {
     return (
@@ -102,12 +105,14 @@ export default class FilteredList extends React.Component {
           </Nav.Item>
         </Nav>
         <DropdownButton id="dropdown-basic-button" title="Dropdown button">
+          <Dropdown.Item eventKey="select" onSelect={this.onSelectSorting}>Select</Dropdown.Item>
           <Dropdown.Item eventKey="ascending" onSelect={this.onSelectSorting}>Lowest to Highest</Dropdown.Item>
           <Dropdown.Item eventKey="descending" onSelect={this.onSelectSorting}>Highest to Lowest</Dropdown.Item>
         </DropdownButton>
+        <DisplayList list={this.state.tempList.filter(this.applyFilters).sort((a, b) => this.sortList(a, b))}/>
         {/* <DisplayList list={this.props.list.filter(this.applyFilters).sort(
           (a, b) => this.state.sortState === "ascending" ? this.sortAscending(a, b) : this.sortDescending(a, b))}/> */}
-        <AggregateList list={this.props.list}/>
+        {/* <AggregateList list={this.props.list}/> */}
       </div>
     );
   }
