@@ -1,5 +1,7 @@
 import React, { Component } from 'react'; 
 import Nav from 'react-bootstrap/Nav';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 import DisplayList from './DisplayList';
 
 export default class FilteredList extends React.Component {
@@ -9,7 +11,8 @@ export default class FilteredList extends React.Component {
     this.state = {
       type: "All",
       location: "All",
-      intensity: 0
+      intensity: 0,
+      sort: "Select"
     }
   }
 
@@ -70,6 +73,32 @@ export default class FilteredList extends React.Component {
     }
   }
 
+  onSelectSort = event => {
+    this.setState({
+      sort: event
+    });
+  }
+
+  sortList = list => {
+    if (this.state.sort === "ascending") {
+      this.setState(prevState => {
+        list.sort((a, b) => (a.intensity - b.intensity))
+      });
+    } else if (this.state.sort == "descending") {
+      this.setState(prevState => {
+        list.sort((a, b) => (b.intensity - a.intensity))
+      });
+    } else {
+      return
+    }
+  }
+
+  applyFiltersAndSort = list => {
+    list.filter(this.applyFilters)
+    this.sortList(list)
+    return list
+  }
+
   render() {
     return (
       <div>
@@ -86,7 +115,12 @@ export default class FilteredList extends React.Component {
             <Nav.Link eventKey="both" onSelect={this.onSelectFilterLocation}>Both</Nav.Link>
           </Nav.Item>
         </Nav>
-        <DisplayList list={this.props.list.filter(this.applyFilters)}/>
+        <DropdownButton id="dropdown-basic-button" title="Dropdown button">
+          <Dropdown.Item eventKey="select" onSelect={this.onSelectSort}>Select</Dropdown.Item>
+          <Dropdown.Item eventKey="ascending" onSelect={this.onSelectSort}>Lowest to Highest</Dropdown.Item>
+          <Dropdown.Item eventKey="descending" onSelect={this.onSelectSort}>Highest to Lowest</Dropdown.Item>
+        </DropdownButton>
+        <DisplayList list={this.applyFiltersAndSort(this.props.list)}/>
       </div>
     );
   }
