@@ -18,6 +18,7 @@ export default class App extends React.Component {
     return (
       <div className="App">
         <header className="App-header">
+          <h1>Mindful</h1>
         </header>
         <div>
           <FilteredList list={activityList} />
