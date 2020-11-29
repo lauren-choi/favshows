@@ -1,16 +1,31 @@
+import React, { Component } from "react";
+import { act } from "react-dom/test-utils";
 import './App.css';
+import DisplayList from './DisplayList';
+import FilteredList from './FilteredList';
 
 // Contains the product list and passes it to FilteredList component
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Hello hellooo
-        </p>
-      </header>
-    </div>
-  );
+export default class App extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = { 
+      list: activityList
+    }
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <header className="App-header">
+        </header>
+        <div>
+          <FilteredList list={activityList} />
+        </div>
+      </div>
+    );
+  }
+
 }
 
 const activityList = [
@@ -26,6 +41,4 @@ const activityList = [
   { name: "listening to music", type: "physical", location: "indoors", intensity: 2 },
   { name: "time with loved ones", type: "physical", location: "both", intensity: 2 },
   { name: "hiking", type: "physical", location: "outdoors", intensity: 3 },
-]
-
-export default App;
+];
