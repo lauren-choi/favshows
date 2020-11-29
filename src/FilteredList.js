@@ -11,8 +11,7 @@ export default class FilteredList extends React.Component {
     this.state = {
       type: "All",
       location: "All",
-      intensity: 0,
-      sort: "Select"
+      sortState: "Select"
     }
   }
 
@@ -23,7 +22,6 @@ export default class FilteredList extends React.Component {
   };
   
   matchesFilterType = item => {
-    // all items should be shown when no filter is selected
     if(this.state.type === "All") { 
       return true
     } else if (this.state.type === item.type) {
@@ -40,7 +38,6 @@ export default class FilteredList extends React.Component {
   };
   
   matchesFilterLocation = item => {
-    // all items should be shown when no filter is selected
     if(this.state.location === "All") { 
       return true
     } else if (this.state.location === item.location) {
@@ -50,7 +47,6 @@ export default class FilteredList extends React.Component {
     }
   }  
 
-  // basically: have a ginormous function that checks all possible conditions
   applyFilters = item => {
     if(this.state.location === "All" && this.state.type === "All") { 
       return true
@@ -73,30 +69,18 @@ export default class FilteredList extends React.Component {
     }
   }
 
-  onSelectSort = event => {
+  onSelectSorting = event => {
     this.setState({
-      sort: event
-    });
+      sortState: event
+    })
+  };
+
+  sortAscending = (a, b) => {
+    this.props.list.sort((a, b) => b.intensity - a.intensity)
   }
 
-  sortList = list => {
-    if (this.state.sort === "ascending") {
-      this.setState(prevState => {
-        list.sort((a, b) => (a.intensity - b.intensity))
-      });
-    } else if (this.state.sort == "descending") {
-      this.setState(prevState => {
-        list.sort((a, b) => (b.intensity - a.intensity))
-      });
-    } else {
-      return
-    }
-  }
-
-  applyFiltersAndSort = list => {
-    list.filter(this.applyFilters)
-    this.sortList(list)
-    return list
+  sortDescending = (a, b) => {
+    this.props.list.sort((a, b) => a.intensity - b.intensity)
   }
 
   render() {
@@ -116,11 +100,11 @@ export default class FilteredList extends React.Component {
           </Nav.Item>
         </Nav>
         <DropdownButton id="dropdown-basic-button" title="Dropdown button">
-          <Dropdown.Item eventKey="select" onSelect={this.onSelectSort}>Select</Dropdown.Item>
-          <Dropdown.Item eventKey="ascending" onSelect={this.onSelectSort}>Lowest to Highest</Dropdown.Item>
-          <Dropdown.Item eventKey="descending" onSelect={this.onSelectSort}>Highest to Lowest</Dropdown.Item>
+          <Dropdown.Item eventKey="ascending" onSelect={this.onSelectSorting}>Lowest to Highest</Dropdown.Item>
+          <Dropdown.Item eventKey="descending" onSelect={this.onSelectSorting}>Highest to Lowest</Dropdown.Item>
         </DropdownButton>
-        <DisplayList list={this.applyFiltersAndSort(this.props.list)}/>
+        <DisplayList list={this.props.list.filter(this.applyFilters).sort(
+          (a, b) => this.state.sortState === "ascending" ? this.sortAscending(a, b) : this.sortDescending(a, b))}/>
       </div>
     );
   }
