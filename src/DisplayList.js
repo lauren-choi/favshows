@@ -9,7 +9,7 @@ export default class DisplayList extends React.Component {
   render() {
     return (
       <div>
-        {this.props.list.map(item => <li>{item.name}, {item.type}</li>)}
+        {this.props.list.map(item => <li>{item.name}, {item.type}, {item.location}, {item.intensity}</li>)}
       </div>
     );
   }

@@ -36,6 +36,8 @@ export default class FilteredList extends React.Component {
         <Nav>
           <Nav.Item>
             <Nav.Link eventKey="All" onSelect={this.onSelectFilterType}>All</Nav.Link>
+            <Nav.Link eventKey="physical" onSelect={this.onSelectFilterType}>Physical</Nav.Link>
+            <Nav.Link eventKey="mental" onSelect={this.onSelectFilterType}>Mental</Nav.Link>
           </Nav.Item>
         </Nav>
         <DisplayList list={this.props.list.filter(this.matchesFilterType)}/>
