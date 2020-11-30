@@ -23,10 +23,7 @@ export default class App extends React.Component {
           <h1>Mindful</h1>
           <p>For logging hours spent on mindful activities</p>
         </header>
-        <div className="main">
-          <FilteredList list={activityList} />
-          <AggregateList list={activityList} />
-        </div>
+        <FilteredList list={activityList} />
       </div>
     );
   }
