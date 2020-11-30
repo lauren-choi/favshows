@@ -2,6 +2,7 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
+import './index.css';
 
 export default class AggregateItem extends React.Component {
 
@@ -33,7 +34,7 @@ export default class AggregateItem extends React.Component {
   render() {
     return (
       <div>
-        <Card style ={{ width: '15rem' }}>
+        <Card className="aggregate-item">
           <Card.Body>
             <Card.Title>{this.props.item.name}</Card.Title>
             <Card.Text>
@@ -45,9 +46,9 @@ export default class AggregateItem extends React.Component {
             <Card.Text>
               Intensity level: {this.props.item.intensity}
             </Card.Text>
-            <ButtonToolbar style={{ border: 'light', width: '10rem' }}>
+            <ButtonToolbar className="button-toolbar">
               <Button variant="outline-secondary" onClick={() => this.onSelectDecrease()}>-</Button>
-                <Card.Text>{this.state.hours}</Card.Text>
+                <Card.Text className="count">{this.state.hours}</Card.Text>
               <Button variant="outline-secondary" onClick={() => this.onSelectIncrease()}>+</Button>
             </ButtonToolbar>
             <Button variant="primary">Remove from list</Button>

@@ -1,6 +1,7 @@
 import React from 'react'; 
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button'
+import Button from 'react-bootstrap/Button';
+import './index.css';
 
 export default class DisplayList extends React.Component {
 
@@ -10,9 +11,9 @@ export default class DisplayList extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="filtered-list">
         {this.props.list.map(item => 
-        <Card style={{ width: '15rem' }}>
+        <Card className="filtered-item">
           <Card.Body>
             <Card.Title>{item.name}</Card.Title>
             <Card.Text>

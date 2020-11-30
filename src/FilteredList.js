@@ -4,6 +4,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import DisplayList from './DisplayList';
 import AggregateList from './AggregateList';
+import './index.css';
 
 export default class FilteredList extends React.Component {
 
@@ -14,7 +15,6 @@ export default class FilteredList extends React.Component {
       location: "All",
       sortState: "Select",
       total: 0,
-      tempList: [...this.props.list]
     }
   }
 
@@ -78,41 +78,40 @@ export default class FilteredList extends React.Component {
     })
   };
 
-  sortList = (a, b) => {
-    if(this.state.sortState === "ascending") { 
-      this.state.tempList.sort((a, b) => a.intensity - b.intensity)
-    } else if (this.state.sortState === "descending") {
-      this.state.tempList.sort((a, b) => b.intensity - a.intensity)
-    } else {
-      this.state.tempList = [...this.props.list]
-    }
-  }  
+  subtractTotal = () => {
+    this.setState({
+      total: this.state.total - 1
+    });
+  }
 
   render() {
     return (
-      <div>
-        <Nav>
-          <Nav.Item>
+      <div className="filtered-display">
+        <Nav className="navigation">
+          <h4>Filter by</h4>
+          <Nav.Item className="navigation-category">
+            <Nav.Item>Activity type:</Nav.Item>
             <Nav.Link eventKey="All" onSelect={this.onSelectFilterType}>All</Nav.Link>
             <Nav.Link eventKey="physical" onSelect={this.onSelectFilterType}>Physical</Nav.Link>
             <Nav.Link eventKey="mental" onSelect={this.onSelectFilterType}>Mental</Nav.Link>
           </Nav.Item>
-          <Nav.Item>
+          <Nav.Item className="navigation-category">
+            <Nav.Item>Location:</Nav.Item>
             <Nav.Link eventKey="All" onSelect={this.onSelectFilterLocation}>All</Nav.Link>
             <Nav.Link eventKey="indoors" onSelect={this.onSelectFilterLocation}>Indoors</Nav.Link>
             <Nav.Link eventKey="outdoors" onSelect={this.onSelectFilterLocation}>Outdoors</Nav.Link>
             <Nav.Link eventKey="both" onSelect={this.onSelectFilterLocation}>Both</Nav.Link>
           </Nav.Item>
+          <h4>Sort by</h4>
+          <Nav.Item className="navigation-category">
+            <Nav.Link eventKey="ascending" onSelect={this.onSelectSorting}>Lowest to Highest</Nav.Link>
+            <Nav.Link eventKey="descending" onSelect={this.onSelectSorting}>Highest to Lowest</Nav.Link>
+          </Nav.Item>
         </Nav>
-        <DropdownButton id="dropdown-basic-button" title="Dropdown button">
-          <Dropdown.Item eventKey="select" onSelect={this.onSelectSorting}>Select</Dropdown.Item>
-          <Dropdown.Item eventKey="ascending" onSelect={this.onSelectSorting}>Lowest to Highest</Dropdown.Item>
-          <Dropdown.Item eventKey="descending" onSelect={this.onSelectSorting}>Highest to Lowest</Dropdown.Item>
-        </DropdownButton>
-        <DisplayList list={this.state.tempList.filter(this.applyFilters).sort((a, b) => this.sortList(a, b))}/>
-        {/* <DisplayList list={this.props.list.filter(this.applyFilters).sort(
-          (a, b) => this.state.sortState === "ascending" ? this.sortAscending(a, b) : this.sortDescending(a, b))}/> */}
-        {/* <AggregateList list={this.props.list}/> */}
+        <div className="filtered-section">
+          <h4>Activities</h4>
+          <DisplayList list={this.props.list.filter(this.applyFilters)}/>
+        </div>
       </div>
     );
   }

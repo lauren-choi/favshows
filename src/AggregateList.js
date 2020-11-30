@@ -1,5 +1,6 @@
 import React from 'react'; 
 import AggregateItem from './AggregateItem';
+import './index.css';
 
 export default class AggregateList extends React.Component {
 
@@ -26,10 +27,12 @@ export default class AggregateList extends React.Component {
 
   render() {
     return (
-      <div>
-        <p>{this.state.total}</p>
-        {this.props.list.map((val) => <AggregateItem item={val} 
-        subtractTotal={this.subtractTotal} addTotal={this.addTotal} />)}
+      <div className="aggregate-display">
+        <h4>Total hours: {this.state.total}</h4>
+        <div className="aggregate-list">
+          {this.props.list.map((val) => <AggregateItem item={val} 
+          subtractTotal={this.subtractTotal} addTotal={this.addTotal} />)}
+        </div>
       </div>
     );
   }

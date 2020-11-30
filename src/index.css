@@ -11,3 +11,82 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+h4 {
+  padding: 1rem 0 0 0;
+}
+
+.main{
+  display: flex;
+}
+
+.navigation {
+  background-color: rgb(144, 217, 240);
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.navigation-category {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.filtered-display {
+  background-color: rgb(141, 182, 141);
+  display: flex;
+  flex-direction: column;
+  max-width: 60vw;
+}
+
+.filtered-section {
+  padding: 1rem 0 0 0;
+}
+
+.filtered-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.filtered-item {
+  width: 14rem;
+  height: 16rem;
+  margin: 1rem;
+}
+
+.aggregate-display {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  background-color: teal;
+  width: 40vw;
+  padding: 1rem;
+}
+
+.aggregate-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.aggregate-item {
+  justify-content: center;
+  align-items: center;
+  width: 14rem;
+  height: 18rem;
+  margin: 1rem;
+}
+
+.button-toolbar {
+  margin-bottom: 1rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+.count {
+  width: 4rem;
+}

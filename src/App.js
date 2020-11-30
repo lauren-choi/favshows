@@ -1,8 +1,10 @@
 import React from "react";
 import { act } from "react-dom/test-utils";
+import AggregateList from "./AggregateList";
 import './App.css';
 import DisplayList from './DisplayList';
 import FilteredList from './FilteredList';
+import './index.css';
 
 // Contains the product list and passes it to FilteredList component
 export default class App extends React.Component {
@@ -19,9 +21,11 @@ export default class App extends React.Component {
       <div className="App">
         <header className="App-header">
           <h1>Mindful</h1>
+          <p>For logging hours spent on mindful activities</p>
         </header>
-        <div>
+        <div className="main">
           <FilteredList list={activityList} />
+          <AggregateList list={activityList} />
         </div>
       </div>
     );
@@ -40,6 +44,6 @@ const activityList = [
   { name: "going on a walk", type: "physical", location: "outdoors", intensity: 3 },
   { name: "arts and crafts", type: "physical", location: "indoors", intensity: 2 },
   { name: "listening to music", type: "physical", location: "indoors", intensity: 2 },
-  { name: "time with loved ones", type: "physical", location: "both", intensity: 2 },
+  { name: "socializing", type: "physical", location: "both", intensity: 2 },
   { name: "hiking", type: "physical", location: "outdoors", intensity: 3 },
 ];
