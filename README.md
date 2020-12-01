@@ -1,4 +1,4 @@
-# FavShows
+# FavShows 📺
 A React app where users compile their favorite TV shows. It tells users the total number of episodes in their list of shows, and it includes functionality for filtering by genre, filtering by status, and sorting by number of episodes. Uses React Bootstrap.
 
 ## Component organization
