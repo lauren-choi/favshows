@@ -4,6 +4,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import DisplayList from './DisplayList';
 import AggregateList from './AggregateList';
+import NavBar from './NavBar';
 import './index.css';
 
 export default class FilteredList extends React.Component {
@@ -89,29 +90,7 @@ export default class FilteredList extends React.Component {
     return (
       <div className="main">
         <div className="filtered-display">
-          <div className="navigation">
-            <h4>Filter by</h4>
-            <Nav variant="pills" defaultActiveKey="all" className="navigation-category">
-              <Nav.Item className="category">Genre:</Nav.Item>
-              <Nav.Item className="nav-item"><Nav.Link eventKey="all" onSelect={this.onSelectFilterGenre}>All</Nav.Link></Nav.Item>
-              <Nav.Item className="nav-item"><Nav.Link eventKey="comedy" onSelect={this.onSelectFilterGenre}>Comedy</Nav.Link></Nav.Item>
-              <Nav.Item className="nav-item"><Nav.Link eventKey="drama" onSelect={this.onSelectFilterGenre}>Drama</Nav.Link></Nav.Item>
-              <Nav.Item className="nav-item"><Nav.Link eventKey="thriller" onSelect={this.onSelectFilterGenre}>Thriller</Nav.Link></Nav.Item>
-            </Nav>
-            <Nav variant="pills" defaultActiveKey="all" className="navigation-category">
-              <Nav.Item className="category">Status:</Nav.Item>
-              <Nav.Item className="nav-item"><Nav.Link eventKey="all" onSelect={this.onSelectFilterStatus}>All</Nav.Link></Nav.Item>
-              <Nav.Item className="nav-item"><Nav.Link eventKey="ongoing" onSelect={this.onSelectFilterStatus}>Ongoing</Nav.Link></Nav.Item>
-              <Nav.Item className="nav-item"><Nav.Link eventKey="complete" onSelect={this.onSelectFilterStatus}>Complete</Nav.Link></Nav.Item>
-            </Nav>
-            <h4>Sort by</h4>
-            <Nav variant="pills" defaultActiveKey="select" className="navigation-category">
-              <Nav.Item className="category">Episodes:</Nav.Item>
-              <Nav.Item className="nav-item"><Nav.Link eventKey="select" onSelect={this.sortEpisodes}>Select</Nav.Link></Nav.Item>
-              <Nav.Item className="nav-item"><Nav.Link eventKey="ascending" onSelect={this.sortEpisodes}>Lowest to Highest</Nav.Link></Nav.Item>
-              <Nav.Item className="nav-item"><Nav.Link eventKey="descending" onSelect={this.sortEpisodes}>Highest to Lowest</Nav.Link></Nav.Item>
-            </Nav>
-          </div>
+          <NavBar onSelectFilterGenre={this.onSelectFilterGenre} onSelectFilterStatus={this.onSelectFilterStatus} sortEpisodes={this.sortEpisodes} />
           <div className="filtered-section">
             <h4>All TV Shows</h4>
             <DisplayList addEpisodes={this.props.addEpisodes} showsList={this.props.showsList.filter(this.applyFilters)} 
