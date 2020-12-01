@@ -108,14 +108,14 @@ export default class FilteredList extends React.Component {
             <h4>Filter by</h4>
             <Nav.Item className="navigation-category">
               <Nav.Item>Genre:</Nav.Item>
-              <Nav.Link eventKey="all" onSelect={this.onSelectFilterGenre}>all</Nav.Link>
+              <Nav.Link eventKey="all" onSelect={this.onSelectFilterGenre}>All</Nav.Link>
               <Nav.Link eventKey="comedy" onSelect={this.onSelectFilterGenre}>Comedy</Nav.Link>
               <Nav.Link eventKey="drama" onSelect={this.onSelectFilterGenre}>Drama</Nav.Link>
               <Nav.Link eventKey="thriller" onSelect={this.onSelectFilterGenre}>Thriller</Nav.Link>
             </Nav.Item>
             <Nav.Item className="navigation-category">
               <Nav.Item>Status:</Nav.Item>
-              <Nav.Link eventKey="all" onSelect={this.onSelectFilterStatus}>all</Nav.Link>
+              <Nav.Link eventKey="all" onSelect={this.onSelectFilterStatus}>All</Nav.Link>
               <Nav.Link eventKey="ongoing" onSelect={this.onSelectFilterStatus}>Ongoing</Nav.Link>
               <Nav.Link eventKey="complete" onSelect={this.onSelectFilterStatus}>Complete</Nav.Link>
             </Nav.Item>

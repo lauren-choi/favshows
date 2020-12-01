@@ -51,9 +51,9 @@ h4 {
   justify-content: space-evenly;
 }
 
-.filtered-item {
+.item {
   width: 14rem;
-  height: 16rem;
+  height: 30rem;
   margin: 1rem;
 }
 
@@ -70,14 +70,6 @@ h4 {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
-}
-
-.aggregate-item {
-  justify-content: center;
-  align-items: center;
-  width: 14rem;
-  height: 18rem;
-  margin: 1rem;
 }
 
 .button-toolbar {

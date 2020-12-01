@@ -16,7 +16,7 @@ export default class AggregateItem extends React.Component {
   render() {
     return (
       <div>
-        <Card className="aggregate-item">
+        <Card className="item">
           <Card.Body>
             <Card.Title>{this.props.item.title}</Card.Title>
               <Card.Text>

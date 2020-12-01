@@ -18,7 +18,8 @@ export default class DisplayList extends React.Component {
     return (
       <div className="filtered-list">
         {this.props.showsList.map(item => 
-        <Card className="filtered-item">
+        <Card className="item">
+          <Card.Img variant="top" src={item.image} style={styles.cardImage} />
           <Card.Body>
             <Card.Title>{item.title}</Card.Title>
             <Card.Text>
@@ -38,5 +39,12 @@ export default class DisplayList extends React.Component {
         </Card>)}
       </div>
     );
+  }
+}
+
+const styles = {
+  cardImage: {
+    objectFit: 'cover',
+    height: '40%'
   }
 }
