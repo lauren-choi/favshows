@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import './index.css';
 
-export default class AggregateItem extends React.Component {
+export default class DisplayItem extends React.Component {
 
   constructor(props) {
     super(props);

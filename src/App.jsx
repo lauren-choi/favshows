@@ -95,7 +95,7 @@ export default class App extends React.Component {
           <h1>FavShows</h1>
           <p>Compile a list of your favorite TV shows + total number of episodes</p>
         </header>
-        main website section
+        {/* main website section */}
         <div className="main">
           {/* left section: includes display of all TV shows and navbar */}
           <FilteredList showsList={this.state.showsList} addToAggregateList={this.addToAggregateList} 
