@@ -1,9 +1,5 @@
 import React from 'react'; 
-import Nav from 'react-bootstrap/Nav';
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
 import DisplayList from './DisplayList';
-import AggregateList from './AggregateList';
 import NavBar from './NavBar';
 import './index.css';
 
@@ -90,7 +86,8 @@ export default class FilteredList extends React.Component {
     return (
       <div className="main">
         <div className="filtered-display">
-          <NavBar onSelectFilterGenre={this.onSelectFilterGenre} onSelectFilterStatus={this.onSelectFilterStatus} sortEpisodes={this.sortEpisodes} />
+          <NavBar onSelectFilterGenre={this.onSelectFilterGenre} 
+          onSelectFilterStatus={this.onSelectFilterStatus} sortEpisodes={this.sortEpisodes} />
           <div className="filtered-section">
             <h4>All TV Shows</h4>
             <DisplayList addEpisodes={this.props.addEpisodes} showsList={this.props.showsList.filter(this.applyFilters)} 

@@ -1,6 +1,4 @@
 import React from 'react'; 
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
 import DisplayItem from './DisplayItem';
 import './index.css';
 

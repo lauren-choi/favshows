@@ -1,7 +1,6 @@
 import React from 'react'; 
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import './index.css';
 
 export default class AggregateItem extends React.Component {
