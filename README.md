@@ -1,70 +1,45 @@
-# Getting Started with Create React App
+# FavShows
+A React app where users compile their favorite TV shows. It tells users the total number of episodes in their list of shows, and it includes functionality for filtering by genre, filtering by status, and sorting by number of episodes. Uses React Bootstrap.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Component organization
+I split the app into three main components: the navigation bar, a list of all TV shows, and an aggregator.
 
-## Available Scripts
+### Navigation
+The navigation bar is split into a separate component called `NavBar`. It includes buttons for filtering by genre, filtering by status, and sorting by number of episodes.
 
-In the project directory, you can run:
+### All TV Shows
+The list of all TV shows is comprised of three separate components. At the base level, each show is represented as a Card in `DisplayItem`. Then, all the shows are displayed as a list of cards in `DisplayList`. Finally, `FilteredList` implements filtering/sorting methods to show the appropriate display.
 
-### `npm start`
+### Aggregator
+Once a user adds a show to their favorites list, it renders inside the aggregator. Each card item is rendered separately as an `AggregateItem` -- this has the same display as a `DisplayItem`, but the button at the bottom includes functionality for removing from the aggregator rather than adding to it. As the user adds more items to the aggregator, they're displayed in list format inside `AggregateList`.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## How data is passed down
+### Topmost level (App.jsx)
+At the topmost level, `App.jsx` stores the list of shows (`showsList`), a list of favorite aggregated shows (`aggregateList`), and the total number of episodes in the aggregated list (`total`). The state of `showsList` is set to a copy of the actual list to avoid mutating the original data when we sort.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Since `App.jsx` houses the raw lists, it also defines all functions acting on them: specifically, `sortEpisodesAscending`, `sortEpisodesDescending`, `resetList`, `addToAggregateList`, `removeFromAggregateList`, and `sumEpisodes`. We pass these down to `FilteredList` and `DisplayList` as props so we can call them later.
 
-### `npm test`
+### List level (FilteredList, DisplayList, AggregateList)
+The second level contains components displaying the items in list format.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+`DisplayList` creates a new function called `addShow`, which calls `addToAggregateList` and `sumEpisodes` for each show in the total list of TV shows. `addShow` is then passed as a prop into each individual show. 
 
-### `npm run build`
+Then, `FilteredList` creates a set of functions to filter the list of shows from `DisplayList`. The constructor initializes the default states for each filter/sort to `all`, which is then updated when respective filters are selected. `FilteredList` also uses the sorting functions passed in from `App.jsx` to sort the filtered list of TV shows. 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Finally, `AggregateList` creates a new function called `removeShow` that calls `removeFromAggregateList` and `sumEpisodes` for each show in the favorited aggregate list. It then passes `removeShow` as a prop into each individual show.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Item level (NavBar, DisplayItem, AggregateItem)
+At the bottom level are individual components/cards.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+`DisplayItem` renders individual shows in the list of all TV shows. Each card displays the properties of a single show object -- which is passed as a prop through the mapping function in `DisplayList` -- and creates a button where users can call the `addShow` method.
 
-### `npm run eject`
+Likewise, `AggregateItem` renders individual shows in the list of aggregated favorite shows. It also displays the properties of a single show object, which is passed as a prop through the mapping function in `AggregateList`. The main difference between this component and `DisplayItem` is that the button calls `removeShow` rather than `addShow`. 
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Another important component is `NavBar`, which is rendered in `FilteredList` but isn't associated with a particular item. NavBar creates selection options for each filter/sort function, calling the sorting/filtering functions passed in as props from `FilteredList`.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## User-triggered state changes
+The main user interactions that trigger state changes are adding to the aggregator, removing from the aggregator, sorting, and filtering.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Each time the user presses a button to add to / remove from the aggregator, it triggers a state change in the topmost level to `total` and `aggregateList`. `sumEpisodes` updates `total`'s state to the current number of episodes in the aggregator, while `aggregateList`'s state is modified to either append or splice the corresponding show. To avoid mutation the original data, we create a copy of the list, perform all functions on the copy, and then set the state of `aggregateList` to the copy.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Additionally, each time the user selects a filtering or sorting method in `NavBar`, the filtering and sorting props defined in `FilteredList` are updated to reflect the selected method. In response, the `applyFilters` method -- in combination with the `filter` builtin -- updates the state of the displayed list to match the applied filters/sorting.
