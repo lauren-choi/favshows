@@ -10,15 +10,14 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      originalList: [...showsList],
-      showsList: showsList,
+      showsList: [...list],
       aggregateList: aggregateList,
       total: 0
     }
   }
 
   sortSeasonsAscending = event => {
-    let listCopy = this.state.showsList;
+    var listCopy = this.state.showsList;
     listCopy.sort((a, b) => a.seasons - b.seasons);
     this.setState({
       showsList: listCopy
@@ -26,7 +25,7 @@ export default class App extends React.Component {
   }
 
   sortEpisodesAscending = event => {
-    let listCopy = this.state.showsList;
+    var listCopy = this.state.showsList;
     listCopy.sort((a, b) => a.episodes - b.episodes);
     this.setState({
       showsList: listCopy
@@ -34,7 +33,7 @@ export default class App extends React.Component {
   }
 
   sortSeasonsDescending = event => {
-    let listCopy = this.state.showsList;
+    var listCopy = this.state.showsList;
     listCopy.sort((a, b) => b.seasons - a.seasons);
     this.setState({
       showsList: listCopy
@@ -42,7 +41,7 @@ export default class App extends React.Component {
   }
 
   sortEpisodesDescending = event => {
-    let listCopy = this.state.showsList;
+    var listCopy = this.state.showsList;
     listCopy.sort((a, b) => b.episodes - a.episodes);
     this.setState({
       showsList: listCopy
@@ -50,8 +49,9 @@ export default class App extends React.Component {
   }
 
   resetList = event => {
+    var listCopy = [...list];
     this.setState({
-      showsList: this.state.originalList
+      showsList: listCopy
     });
   }
 
@@ -100,7 +100,7 @@ export default class App extends React.Component {
 
 }
 
-const showsList = [
+const list = [
   {title: "The Office", seasons: 9, episodes: 201, genre: "comedy", status: "complete", image: "https://img.nbc.com/sites/nbcunbc/files/images/2016/1/19/MDot-TheOffice-640x360-MP.jpg"},
   {title: "Black-ish", seasons: 7, episodes: 142, genre: "comedy", status: "ongoing", image: "https://m.media-amazon.com/images/M/MV5BNzU5NDc1YTYtN2JmMS00NjY3LWE0ZTUtMjM4NjVhZjljNjViXkEyXkFqcGdeQXVyMzQ2MDI5NjU@._V1_UY1200_CR85,0,630,1200_AL_.jpg"},
   {title: "Emily in Paris", seasons: 1, episodes: 10, genre: "drama", status: "ongoing", image:"https://lh3.googleusercontent.com/proxy/0ayrYonNQkn5uRa_dMZpIec_yzKtnZL_aHQ_yUquhpdoeWKo58xtZs4-vgVySgnJxOpeF4GBQakJA3U_ny8IWwGgRMkV0uYhz2m_mCG_iXBgxJk" },
