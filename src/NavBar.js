@@ -2,6 +2,7 @@ import React from 'react';
 import Nav from 'react-bootstrap/Nav';
 import './index.css';
 
+// builds the top navigation bar with filtering and sorting options
 export default class NavBar extends React.Component {
 
   constructor(props) {
@@ -12,6 +13,7 @@ export default class NavBar extends React.Component {
     return (
       <div className="navigation">
         <h4>Filter by</h4>
+        {/* filtering by genre */}
         <Nav variant="pills" defaultActiveKey="all" className="navigation-category">
           <Nav.Item className="category">Genre:</Nav.Item>
           <Nav.Item className="nav-item"><Nav.Link eventKey="all" onSelect={this.props.onSelectFilterGenre}>All</Nav.Link></Nav.Item>
@@ -19,6 +21,7 @@ export default class NavBar extends React.Component {
           <Nav.Item className="nav-item"><Nav.Link eventKey="drama" onSelect={this.props.onSelectFilterGenre}>Drama</Nav.Link></Nav.Item>
           <Nav.Item className="nav-item"><Nav.Link eventKey="thriller" onSelect={this.props.onSelectFilterGenre}>Thriller</Nav.Link></Nav.Item>
         </Nav>
+        {/* filtering by status */}
         <Nav variant="pills" defaultActiveKey="all" className="navigation-category">
           <Nav.Item className="category">Status:</Nav.Item>
           <Nav.Item className="nav-item"><Nav.Link eventKey="all" onSelect={this.props.onSelectFilterStatus}>All</Nav.Link></Nav.Item>
@@ -26,6 +29,7 @@ export default class NavBar extends React.Component {
           <Nav.Item className="nav-item"><Nav.Link eventKey="complete" onSelect={this.props.onSelectFilterStatus}>Complete</Nav.Link></Nav.Item>
         </Nav>
         <h4>Sort by</h4>
+        {/* sorting by number of episodes */}
         <Nav variant="pills" defaultActiveKey="select" className="navigation-category">
           <Nav.Item className="category">Episodes:</Nav.Item>
           <Nav.Item className="nav-item"><Nav.Link eventKey="select" onSelect={this.props.sortEpisodes}>Select</Nav.Link></Nav.Item>

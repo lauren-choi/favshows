@@ -3,6 +3,7 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import './index.css';
 
+// a single show in the display of all TV shows
 export default class DisplayItem extends React.Component {
 
   constructor(props) {
@@ -12,7 +13,9 @@ export default class DisplayItem extends React.Component {
   render() {
     return (
       <div>
+        {/* card representing the TV show */}
         <Card className="item">
+          {/* image corresponding to show */}
           <Card.Img variant="top" src={this.props.item.image} style={styles.cardImage} />
           <Card.Body>
             <Card.Title>{this.props.item.title}</Card.Title>
@@ -28,6 +31,7 @@ export default class DisplayItem extends React.Component {
             <Card.Text>
               Status: {this.props.item.status}
             </Card.Text>
+            {/* button for adding the show to list of aggregated favorites */}
             <Button variant="primary" onClick={() => this.props.addShow(this.props.item)}>Add to favorites</Button>
           </Card.Body>
         </Card>
@@ -36,6 +40,7 @@ export default class DisplayItem extends React.Component {
   }
 }
 
+// styles the image at the top of each card
 const styles = {
   cardImage: {
     objectFit: 'cover',
