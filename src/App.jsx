@@ -69,7 +69,7 @@ export default class App extends React.Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1>To-watch</h1>
+          <h1>FavShows</h1>
           <p>Compile a list of your favorite TV shows + total number of episodes</p>
         </header>
         <div className="main">
