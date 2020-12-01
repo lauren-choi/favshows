@@ -6,32 +6,17 @@ export default class AggregateList extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      total: 0
-    };
   }
 
-  subtractFromTotal = (hours) => {
-    this.setState({
-      total: this.state.total - hours
-    });
-  }
-
-  addToTotal = (hours) => {
-    this.setState({
-      total: this.state.total + hours
-    });
-  }
-
-  removeItem = (item, hours) => {
-    this.subtractFromTotal(hours);
+  removeItem = (item, episodes) => {
     this.props.removeFromAggregateList(item);
+    this.props.sumEpisodes();
   }
 
   render() {
     return (
       <div className="aggregate-display">
-        <h4>Total hours: {this.state.total}</h4>
+        <h4>Total episodes: {this.props.total}</h4>
         <div className="aggregate-list">
           {this.props.aggregateList.map((val) => <AggregateItem item={val} 
           subtractFromTotal={this.subtractFromTotal} addToTotal={this.addToTotal} removeItem={this.removeItem} />)}

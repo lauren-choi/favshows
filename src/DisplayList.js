@@ -11,23 +11,27 @@ export default class DisplayList extends React.Component {
 
   addActivity = (item) => {
     this.props.addToAggregateList(item);
+    this.props.sumEpisodes();
   }
 
   render() {
     return (
       <div className="filtered-list">
-        {this.props.activityList.map(item => 
+        {this.props.showsList.map(item => 
         <Card className="filtered-item">
           <Card.Body>
-            <Card.Title>{item.name}</Card.Title>
+            <Card.Title>{item.title}</Card.Title>
             <Card.Text>
-              Activity type: {item.type}
+              Seasons: {item.seasons}
             </Card.Text>
             <Card.Text>
-              Location: {item.location}
+              Episodes: {item.episodes}
             </Card.Text>
             <Card.Text>
-              Intensity level: {item.intensity}
+              Genre: {item.genre}
+            </Card.Text>
+            <Card.Text>
+              Status: {item.status}
             </Card.Text>
             <Button variant="primary" onClick={() => this.addActivity(item)}>Add to list</Button>
           </Card.Body>

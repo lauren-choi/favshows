@@ -11,38 +11,41 @@ export default class FilteredList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      type: "All",
-      location: "All",
-      sortState: "Select",
+      seasons: "all",
+      episodes: "all",
+      genre: "all",
+      status: "all",
+      seasonsSort: "select",
+      episodesSort: "select",
     }
   }
 
-  onSelectFilterType = event => {
+  onSelectFilterGenre = event => {
     this.setState({
-      type: event
+      genre: event
     })
   };
   
-  matchesFilterType = item => {
-    if(this.state.type === "All") { 
+  matchesFilterGenre = item => {
+    if(this.state.genre === "all") { 
       return true
-    } else if (this.state.type === item.type) {
+    } else if (this.state.genre === item.genre) {
       return true
     } else {
       return false
     }
   }  
 
-  onSelectFilterLocation = event => {
+  onSelectFilterStatus = event => {
     this.setState({
-      location: event
+      status: event
     })
   };
   
-  matchesFilterLocation = item => {
-    if(this.state.location === "All") { 
+  matchesFilterStatus = item => {
+    if(this.state.status === "all") { 
       return true
-    } else if (this.state.location === item.location) {
+    } else if (this.state.status === item.status) {
       return true
     } else {
       return false
@@ -50,35 +53,48 @@ export default class FilteredList extends React.Component {
   }  
 
   applyFilters = item => {
-    if(this.state.location === "All" && this.state.type === "All") { 
+    if(this.state.status === "all" && this.state.genre === "all") { 
       return true
-    } else if (this.state.location === "All" && this.state.type !== "All") {
-      if (this.state.type === item.type) {
+    } else if (this.state.status === "all" && this.state.genre !== "all") {
+      if (this.state.genre === item.genre) {
         return true
       } else {
         return false
       }
-    } else if (this.state.type === "All" && this.state.location !== "All") {
-      if (this.state.location === item.location) {
+    } else if (this.state.genre === "all" && this.state.status !== "all") {
+      if (this.state.status === item.status) {
         return true
       } else {
         return false
       }
-    } else if (this.state.location === item.location && this.state.type === item.type) {
+    } else if (this.state.status === item.status && this.state.genre === item.genre) {
       return true
     } else {
       return false
     }
   }
 
-  onSelectSorting = event => {
+  sortSeasons = event => {
     this.setState({
-      sortState: event
+      seasonsSort: event
     });
     if (event === "descending") {
-      this.props.sortDescending();
+      this.props.sortSeasonsDescending();
     } else if (event === "ascending") {
-      this.props.sortAscending();
+      this.props.sortSeasonsAscending();
+    } else {
+      this.props.resetList();
+    }
+  };
+
+  sortEpisodes = event => {
+    this.setState({
+      episodesSort: event
+    });
+    if (event === "descending") {
+      this.props.sortEpisodesDescending();
+    } else if (event === "ascending") {
+      this.props.sortEpisodesAscending();
     } else {
       this.props.resetList();
     }
@@ -91,28 +107,36 @@ export default class FilteredList extends React.Component {
           <Nav className="navigation">
             <h4>Filter by</h4>
             <Nav.Item className="navigation-category">
-              <Nav.Item>Activity type:</Nav.Item>
-              <Nav.Link eventKey="All" onSelect={this.onSelectFilterType}>All</Nav.Link>
-              <Nav.Link eventKey="physical" onSelect={this.onSelectFilterType}>Physical</Nav.Link>
-              <Nav.Link eventKey="mental" onSelect={this.onSelectFilterType}>Mental</Nav.Link>
+              <Nav.Item>Genre:</Nav.Item>
+              <Nav.Link eventKey="all" onSelect={this.onSelectFilterGenre}>all</Nav.Link>
+              <Nav.Link eventKey="comedy" onSelect={this.onSelectFilterGenre}>Comedy</Nav.Link>
+              <Nav.Link eventKey="drama" onSelect={this.onSelectFilterGenre}>Drama</Nav.Link>
+              <Nav.Link eventKey="thriller" onSelect={this.onSelectFilterGenre}>Thriller</Nav.Link>
             </Nav.Item>
             <Nav.Item className="navigation-category">
-              <Nav.Item>Location:</Nav.Item>
-              <Nav.Link eventKey="All" onSelect={this.onSelectFilterLocation}>All</Nav.Link>
-              <Nav.Link eventKey="indoors" onSelect={this.onSelectFilterLocation}>Indoors</Nav.Link>
-              <Nav.Link eventKey="outdoors" onSelect={this.onSelectFilterLocation}>Outdoors</Nav.Link>
-              <Nav.Link eventKey="both" onSelect={this.onSelectFilterLocation}>Both</Nav.Link>
+              <Nav.Item>Status:</Nav.Item>
+              <Nav.Link eventKey="all" onSelect={this.onSelectFilterStatus}>all</Nav.Link>
+              <Nav.Link eventKey="ongoing" onSelect={this.onSelectFilterStatus}>Ongoing</Nav.Link>
+              <Nav.Link eventKey="complete" onSelect={this.onSelectFilterStatus}>Complete</Nav.Link>
             </Nav.Item>
             <h4>Sort by</h4>
             <Nav.Item className="navigation-category">
-              <Nav.Link eventKey="Select" onSelect={this.onSelectSorting}>Select</Nav.Link>
-              <Nav.Link eventKey="ascending" onSelect={this.onSelectSorting}>Lowest to Highest</Nav.Link>
-              <Nav.Link eventKey="descending" onSelect={this.onSelectSorting}>Highest to Lowest</Nav.Link>
+              <Nav.Item>Seasons:</Nav.Item>
+              <Nav.Link eventKey="select" onSelect={this.sortSeasons}>Select</Nav.Link>
+              <Nav.Link eventKey="ascending" onSelect={this.sortSeasons}>Lowest to Highest</Nav.Link>
+              <Nav.Link eventKey="descending" onSelect={this.sortSeasons}>Highest to Lowest</Nav.Link>
+            </Nav.Item>
+            <Nav.Item className="navigation-category">
+              <Nav.Item>Episodes:</Nav.Item>
+              <Nav.Link eventKey="select" onSelect={this.sortEpisodes}>Select</Nav.Link>
+              <Nav.Link eventKey="ascending" onSelect={this.sortEpisodes}>Lowest to Highest</Nav.Link>
+              <Nav.Link eventKey="descending" onSelect={this.sortEpisodes}>Highest to Lowest</Nav.Link>
             </Nav.Item>
           </Nav>
           <div className="filtered-section">
             <h4>Activities</h4>
-            <DisplayList activityList={this.props.activityList.filter(this.applyFilters)} addToAggregateList={this.props.addToAggregateList} />
+            <DisplayList addEpisodes={this.props.addEpisodes} showsList={this.props.showsList.filter(this.applyFilters)} 
+            addToAggregateList={this.props.addToAggregateList} sumEpisodes={this.props.sumEpisodes}/>
           </div>
         </div>
       </div>

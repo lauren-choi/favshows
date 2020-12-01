@@ -10,31 +10,48 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      originalList: [...activityList],
-      activityList: activityList,
+      originalList: [...showsList],
+      showsList: showsList,
       aggregateList: aggregateList,
+      total: 0
     }
   }
 
-  sortAscending = event => {
-    let listCopy = this.state.activityList;
-    listCopy.sort((a, b) => a.intensity - b.intensity);
+  sortSeasonsAscending = event => {
+    let listCopy = this.state.showsList;
+    listCopy.sort((a, b) => a.seasons - b.seasons);
     this.setState({
-      activityList: listCopy
+      showsList: listCopy
     });
   }
 
-  sortDescending = event => {
-    let listCopy = this.state.activityList;
-    listCopy.sort((a, b) => b.intensity - a.intensity);
+  sortEpisodesAscending = event => {
+    let listCopy = this.state.showsList;
+    listCopy.sort((a, b) => a.episodes - b.episodes);
     this.setState({
-      activityList: listCopy
+      showsList: listCopy
+    });
+  }
+
+  sortSeasonsDescending = event => {
+    let listCopy = this.state.showsList;
+    listCopy.sort((a, b) => b.seasons - a.seasons);
+    this.setState({
+      showsList: listCopy
+    });
+  }
+
+  sortEpisodesDescending = event => {
+    let listCopy = this.state.showsList;
+    listCopy.sort((a, b) => b.episodes - a.episodes);
+    this.setState({
+      showsList: listCopy
     });
   }
 
   resetList = event => {
     this.setState({
-      activityList: this.state.originalList
+      showsList: this.state.originalList
     });
   }
 
@@ -55,17 +72,27 @@ export default class App extends React.Component {
     });
   }
 
+  sumEpisodes = () => {
+    let sum = this.state.aggregateList.reduce((cumulative, show) => cumulative + show.episodes, 0);
+    this.setState({
+      total: sum
+    });
+  }
+
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <h1>Mindful</h1>
-          <p>For logging hours spent on mindful activities</p>
+          <h1>To-watch</h1>
+          <p>For creating a list of TV shows to watch</p>
         </header>
         <div className="main">
-          <FilteredList activityList={this.state.activityList} addToAggregateList={this.addToAggregateList} 
-          sortAscending={this.sortAscending} sortDescending={this.sortDescending} resetList={this.resetList}/>
-          <AggregateList aggregateList={this.state.aggregateList} removeFromAggregateList={this.removeFromAggregateList} />
+          <FilteredList showsList={this.state.showsList} addToAggregateList={this.addToAggregateList} 
+          sortSeasonsAscending={this.sortSeasonsAscending} sortEpisodesAscending={this.sortEpisodesAscending}
+          sortSeasonsDescending={this.sortSeasonsDescending} sortEpisodesDescending={this.sortEpisodesDescending}
+          resetList={this.resetList} sumEpisodes={this.sumEpisodes}/>
+          <AggregateList total={this.state.total} aggregateList={this.state.aggregateList} 
+          removeFromAggregateList={this.removeFromAggregateList} sumEpisodes={this.sumEpisodes}/>
         </div>
       </div>
     );
@@ -73,19 +100,19 @@ export default class App extends React.Component {
 
 }
 
-const activityList = [
-  { name: "sleeping", type: "physical", location: "indoors", intensity: 1} ,
-  { name: "meditating", type: "mental", location: "indoors", intensity: 1 },
-  { name: "yoga", type: "physical", location: "both", intensity: 2 },
-  { name: "breathing exercises", type: "mental", location: "both", intensity: 1 },
-  { name: "journaling", type: "mental", location: "both", intensity: 1 },
-  { name: "healthy cooking", type: "physical", location: "indoors", intensity: 3 },
-  { name: "affirmations", type: "mental", location: "both", intensity: 1 },
-  { name: "going on a walk", type: "physical", location: "outdoors", intensity: 3 },
-  { name: "arts and crafts", type: "physical", location: "indoors", intensity: 2 },
-  { name: "listening to music", type: "physical", location: "indoors", intensity: 2 },
-  { name: "socializing", type: "physical", location: "both", intensity: 2 },
-  { name: "stargazing", type: "mental", location: "outdoors", intensity: 1 },
-];
+const showsList = [
+  {title: "The Office", seasons: 9, episodes: 201, genre: "comedy", status: "complete"},
+  {title: "Black-ish", seasons: 7, episodes: 142, genre: "comedy", status: "ongoing"},
+  {title: "Emily in Paris", seasons: 1, episodes: 10, genre: "drama", status: "ongoing"},
+  {title: "The Crown", seasons: 3, episodes: 30, genre: "drama", status: "ongoing"},
+  {title: "Gilmore Girls", seasons: 7, episodes: 153, genre: "drama", status: "complete"},
+  {title: "Black Mirror", seasons: 5, episodes: 22, genre: "thriller", status: "ongoing"},
+  {title: "Breaking Bad", seasons: 5, episodes: 62, genre: "thriller", status: "complete"},
+  {title: "Quantico", seasons: 3, episodes: 57, genre: "thriller", status: "ongoing"},
+  {title: "Narcos", seasons: 3, episodes: 30, genre: "thriller", status: "complete"},
+  {title: "Grey's Anatomy", seasons: 16, episodes: 363, genre: "drama", status: "ongoing"},
+  {title: "Schitt's Creek", seasons: 6, episodes: 80, genre: "comedy", status: "complete"},
+  {title: "Brooklyn Nine-Nine", seasons: 7, episodes: 143, genre: "comedy", status: "ongoing"},
+]
 
 const aggregateList = [];
