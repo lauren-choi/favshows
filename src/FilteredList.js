@@ -104,35 +104,35 @@ export default class FilteredList extends React.Component {
     return (
       <div className="main">
         <div className="filtered-display">
-          <Nav className="navigation">
+          <div className="navigation">
             <h4>Filter by</h4>
-            <Nav.Item className="navigation-category">
+            <Nav variant="pills" defaultActiveKey="all" className="navigation-category">
               <Nav.Item>Genre:</Nav.Item>
-              <Nav.Link eventKey="all" onSelect={this.onSelectFilterGenre}>All</Nav.Link>
-              <Nav.Link eventKey="comedy" onSelect={this.onSelectFilterGenre}>Comedy</Nav.Link>
-              <Nav.Link eventKey="drama" onSelect={this.onSelectFilterGenre}>Drama</Nav.Link>
-              <Nav.Link eventKey="thriller" onSelect={this.onSelectFilterGenre}>Thriller</Nav.Link>
-            </Nav.Item>
-            <Nav.Item className="navigation-category">
+              <Nav.Item><Nav.Link eventKey="all" onSelect={this.onSelectFilterGenre}>All</Nav.Link></Nav.Item>
+              <Nav.Item><Nav.Link eventKey="comedy" onSelect={this.onSelectFilterGenre}>Comedy</Nav.Link></Nav.Item>
+              <Nav.Item><Nav.Link eventKey="drama" onSelect={this.onSelectFilterGenre}>Drama</Nav.Link></Nav.Item>
+              <Nav.Item><Nav.Link eventKey="thriller" onSelect={this.onSelectFilterGenre}>Thriller</Nav.Link></Nav.Item>
+            </Nav>
+            <Nav variant="pills" defaultActiveKey="all" className="navigation-category">
               <Nav.Item>Status:</Nav.Item>
-              <Nav.Link eventKey="all" onSelect={this.onSelectFilterStatus}>All</Nav.Link>
-              <Nav.Link eventKey="ongoing" onSelect={this.onSelectFilterStatus}>Ongoing</Nav.Link>
-              <Nav.Link eventKey="complete" onSelect={this.onSelectFilterStatus}>Complete</Nav.Link>
-            </Nav.Item>
+              <Nav.Item><Nav.Link eventKey="all" onSelect={this.onSelectFilterStatus}>All</Nav.Link></Nav.Item>
+              <Nav.Item><Nav.Link eventKey="ongoing" onSelect={this.onSelectFilterStatus}>Ongoing</Nav.Link></Nav.Item>
+              <Nav.Item><Nav.Link eventKey="complete" onSelect={this.onSelectFilterStatus}>Complete</Nav.Link></Nav.Item>
+            </Nav>
             <h4>Sort by</h4>
-            <Nav.Item className="navigation-category">
+            <Nav variant="pills" defaultActiveKey="select" className="navigation-category">
               <Nav.Item>Seasons:</Nav.Item>
-              <Nav.Link eventKey="select" onSelect={this.sortSeasons}>Select</Nav.Link>
-              <Nav.Link eventKey="ascending" onSelect={this.sortSeasons}>Lowest to Highest</Nav.Link>
-              <Nav.Link eventKey="descending" onSelect={this.sortSeasons}>Highest to Lowest</Nav.Link>
-            </Nav.Item>
-            <Nav.Item className="navigation-category">
-              <Nav.Item>Episodes:</Nav.Item>
-              <Nav.Link eventKey="select" onSelect={this.sortEpisodes}>Select</Nav.Link>
-              <Nav.Link eventKey="ascending" onSelect={this.sortEpisodes}>Lowest to Highest</Nav.Link>
-              <Nav.Link eventKey="descending" onSelect={this.sortEpisodes}>Highest to Lowest</Nav.Link>
-            </Nav.Item>
-          </Nav>
+              <Nav.Item><Nav.Link eventKey="select" onSelect={this.sortSeasons}>Select</Nav.Link></Nav.Item>
+              <Nav.Item><Nav.Link eventKey="ascending" onSelect={this.sortSeasons}>Lowest to Highest</Nav.Link></Nav.Item>
+              <Nav.Item><Nav.Link eventKey="descending" onSelect={this.sortSeasons}>Highest to Lowest</Nav.Link></Nav.Item>
+            </Nav>
+            <Nav variant="pills" defaultActiveKey="select" className="navigation-category">
+              <Nav.Item>Episodes</Nav.Item>
+              <Nav.Item><Nav.Link eventKey="select" onSelect={this.sortEpisodes}>Select</Nav.Link></Nav.Item>
+              <Nav.Item><Nav.Link eventKey="ascending" onSelect={this.sortEpisodes}>Lowest to Highest</Nav.Link></Nav.Item>
+              <Nav.Item><Nav.Link eventKey="descending" onSelect={this.sortEpisodes}>Highest to Lowest</Nav.Link></Nav.Item>
+            </Nav>
+          </div>
           <div className="filtered-section">
             <h4>Activities</h4>
             <DisplayList addEpisodes={this.props.addEpisodes} showsList={this.props.showsList.filter(this.applyFilters)} 
