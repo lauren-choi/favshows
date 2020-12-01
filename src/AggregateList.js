@@ -8,7 +8,7 @@ export default class AggregateList extends React.Component {
     super(props);
   }
 
-  removeItem = (item, episodes) => {
+  removeItem = (item) => {
     this.props.removeFromAggregateList(item);
     this.props.sumEpisodes();
   }

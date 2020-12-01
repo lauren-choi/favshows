@@ -56,11 +56,13 @@ export default class App extends React.Component {
   }
 
   addToAggregateList = (item) => {
-    let listCopy = this.state.aggregateList;
-    listCopy.push(item);
-    this.setState({
-      aggregateList: listCopy
-    });
+    if (!this.state.aggregateList.includes(item)) {
+      let listCopy = this.state.aggregateList;
+      listCopy.push(item);
+      this.setState({
+        aggregateList: listCopy
+      });
+    }
   }
 
   removeFromAggregateList = (item) => {
