@@ -10,55 +10,77 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
+      // list of all TV shows
       showsList: [...list],
+      // list of aggregated favorite shows
       aggregateList: aggregateList,
+      // total number of episodes
       total: 0
     }
   }
 
+  // sorts the list of shows by number of episodes (lowest to highest)
   sortEpisodesAscending = event => {
+    // create a copy of the list of shows
     var listCopy = this.state.showsList;
+    // sort the copy by number of episodes (ascending) and update the state of
+    // the shows list
     listCopy.sort((a, b) => a.episodes - b.episodes);
     this.setState({
       showsList: listCopy
     });
   }
 
+  // sorts the list of shows by number of episodes (highest to lowest)
   sortEpisodesDescending = event => {
+    // create a copy of the list of shows
     var listCopy = this.state.showsList;
+    // sort the copy by number of episodes (descending) and update the state of
+    // the shows list
     listCopy.sort((a, b) => b.episodes - a.episodes);
     this.setState({
       showsList: listCopy
     });
   }
 
+  // resets the list of shows to the original unsorted state
   resetList = event => {
+    // create a copy of the original list and update the state of the shows list
     var listCopy = [...list];
     this.setState({
       showsList: listCopy
     });
   }
 
-  addToAggregateList = (item) => {
-    if (!this.state.aggregateList.includes(item)) {
+  // adds a show to the aggregated favorites list
+  addToAggregateList = (show) => {
+    // check if the aggregated list already includes the show
+    if (!this.state.aggregateList.includes(show)) {
+      // create a copy of the aggregated list, append the show, then update the state
       let listCopy = this.state.aggregateList;
-      listCopy.push(item);
+      listCopy.push(show);
       this.setState({
         aggregateList: listCopy
       });
     }
   }
 
-  removeFromAggregateList = (item) => {
+  // removes a show from the aggregated favorites list
+  removeFromAggregateList = (show) => {
+    // create a copy of the aggregated list
     let listCopy = this.state.aggregateList;
-    const index = listCopy.indexOf(item);
+    // find the index of the show in the list and remove accordingly
+    const index = listCopy.indexOf(show);
     listCopy.splice(index, 1)
+    // update the state
     this.setState({
       aggregateList: listCopy
     });
   }
 
+  // finds the sum of all the episodes in the aggregated favorites list
   sumEpisodes = () => {
+    // sum up the episode value of all objects in the list and update state
     let sum = this.state.aggregateList.reduce((cumulative, show) => cumulative + show.episodes, 0);
     this.setState({
       total: sum
@@ -68,15 +90,19 @@ export default class App extends React.Component {
   render() {
     return (
       <div className="App">
+        {/* website header */}
         <header className="App-header">
           <h1>FavShows</h1>
           <p>Compile a list of your favorite TV shows + total number of episodes</p>
         </header>
+        main website section
         <div className="main">
+          {/* left section: includes display of all TV shows and navbar */}
           <FilteredList showsList={this.state.showsList} addToAggregateList={this.addToAggregateList} 
           sortEpisodesAscending={this.sortEpisodesAscending}
           sortEpisodesDescending={this.sortEpisodesDescending}
           resetList={this.resetList} sumEpisodes={this.sumEpisodes}/>
+          {/* right section: display of items in aggregated favorites */}
           <AggregateList total={this.state.total} aggregateList={this.state.aggregateList} 
           removeFromAggregateList={this.removeFromAggregateList} sumEpisodes={this.sumEpisodes}/>
         </div>
@@ -86,6 +112,7 @@ export default class App extends React.Component {
 
 }
 
+// the list of all TV shows
 const list = [
   {title: "The Office", seasons: 9, episodes: 201, genre: "comedy", status: "complete", image: "https://img.nbc.com/sites/nbcunbc/files/images/2016/1/19/MDot-TheOffice-640x360-MP.jpg"},
   {title: "Black-ish", seasons: 7, episodes: 142, genre: "comedy", status: "ongoing", image: "https://m.media-amazon.com/images/M/MV5BNzU5NDc1YTYtN2JmMS00NjY3LWE0ZTUtMjM4NjVhZjljNjViXkEyXkFqcGdeQXVyMzQ2MDI5NjU@._V1_UY1200_CR85,0,630,1200_AL_.jpg"},
@@ -101,4 +128,5 @@ const list = [
   {title: "Brooklyn Nine-Nine", seasons: 7, episodes: 143, genre: "comedy", status: "ongoing", image:"https://i.pinimg.com/originals/45/c8/a1/45c8a13fb34846b7e78eecd8bd0a306c.jpg" },
 ]
 
+// the aggregated list of favorites
 const aggregateList = [];
