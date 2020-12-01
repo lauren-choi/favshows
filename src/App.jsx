@@ -16,25 +16,9 @@ export default class App extends React.Component {
     }
   }
 
-  sortSeasonsAscending = event => {
-    var listCopy = this.state.showsList;
-    listCopy.sort((a, b) => a.seasons - b.seasons);
-    this.setState({
-      showsList: listCopy
-    });
-  }
-
   sortEpisodesAscending = event => {
     var listCopy = this.state.showsList;
     listCopy.sort((a, b) => a.episodes - b.episodes);
-    this.setState({
-      showsList: listCopy
-    });
-  }
-
-  sortSeasonsDescending = event => {
-    var listCopy = this.state.showsList;
-    listCopy.sort((a, b) => b.seasons - a.seasons);
     this.setState({
       showsList: listCopy
     });
@@ -90,8 +74,8 @@ export default class App extends React.Component {
         </header>
         <div className="main">
           <FilteredList showsList={this.state.showsList} addToAggregateList={this.addToAggregateList} 
-          sortSeasonsAscending={this.sortSeasonsAscending} sortEpisodesAscending={this.sortEpisodesAscending}
-          sortSeasonsDescending={this.sortSeasonsDescending} sortEpisodesDescending={this.sortEpisodesDescending}
+          sortEpisodesAscending={this.sortEpisodesAscending}
+          sortEpisodesDescending={this.sortEpisodesDescending}
           resetList={this.resetList} sumEpisodes={this.sumEpisodes}/>
           <AggregateList total={this.state.total} aggregateList={this.state.aggregateList} 
           removeFromAggregateList={this.removeFromAggregateList} sumEpisodes={this.sumEpisodes}/>

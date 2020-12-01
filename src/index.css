@@ -33,6 +33,14 @@ h4 {
   align-items: center;
 }
 
+.category {
+  padding: 0 1rem 0 0;
+}
+
+.nav-item {
+  padding: 0.2rem 0.5rem 0.2rem 0.5rem;
+}
+
 .filtered-display {
   background-color: rgb(141, 182, 141);
   display: flex;
