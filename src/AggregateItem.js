@@ -17,6 +17,7 @@ export default class AggregateItem extends React.Component {
     return (
       <div>
         <Card className="item">
+          <Card.Img variant="top" src={this.props.item.image} style={styles.cardImage} />
           <Card.Body>
             <Card.Title>{this.props.item.title}</Card.Title>
               <Card.Text>
@@ -36,5 +37,12 @@ export default class AggregateItem extends React.Component {
         </Card>
       </div>
     );
+  }
+}
+
+const styles = {
+  cardImage: {
+    objectFit: 'cover',
+    height: '40%'
   }
 }
