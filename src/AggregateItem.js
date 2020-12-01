@@ -32,7 +32,7 @@ export default class AggregateItem extends React.Component {
               <Card.Text>
                 Status: {this.props.item.status}
               </Card.Text>
-            <Button variant="primary" onClick={() => this.props.removeItem(this.props.item)}>Remove from list</Button>
+            <Button variant="primary" onClick={() => this.props.removeItem(this.props.item)}>Remove from favorites</Button>
           </Card.Body>
         </Card>
       </div>

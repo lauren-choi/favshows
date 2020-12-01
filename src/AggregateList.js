@@ -16,7 +16,8 @@ export default class AggregateList extends React.Component {
   render() {
     return (
       <div className="aggregate-display">
-        <h4>Total episodes: {this.props.total}</h4>
+        <h4>Favorites</h4>
+        <h5>Total episodes: {this.props.total}</h5>
         <div className="aggregate-list">
           {this.props.aggregateList.map((val) => <AggregateItem item={val} 
           subtractFromTotal={this.subtractFromTotal} addToTotal={this.addToTotal} removeItem={this.removeItem} />)}

@@ -70,7 +70,7 @@ export default class App extends React.Component {
       <div className="App">
         <header className="App-header">
           <h1>To-watch</h1>
-          <p>For creating a list of TV shows to watch</p>
+          <p>Compile a list of your favorite TV shows + total number of episodes</p>
         </header>
         <div className="main">
           <FilteredList showsList={this.state.showsList} addToAggregateList={this.addToAggregateList} 

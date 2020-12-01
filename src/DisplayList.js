@@ -34,7 +34,7 @@ export default class DisplayList extends React.Component {
             <Card.Text>
               Status: {item.status}
             </Card.Text>
-            <Button variant="primary" onClick={() => this.addActivity(item)}>Add to list</Button>
+            <Button variant="primary" onClick={() => this.addActivity(item)}>Add to favorites</Button>
           </Card.Body>
         </Card>)}
       </div>

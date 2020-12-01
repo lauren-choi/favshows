@@ -106,7 +106,7 @@ export default class FilteredList extends React.Component {
             </Nav>
             <h4>Sort by</h4>
             <Nav variant="pills" defaultActiveKey="select" className="navigation-category">
-              <Nav.Item className="category">Episodes</Nav.Item>
+              <Nav.Item className="category">Episodes:</Nav.Item>
               <Nav.Item className="nav-item"><Nav.Link eventKey="select" onSelect={this.sortEpisodes}>Select</Nav.Link></Nav.Item>
               <Nav.Item className="nav-item"><Nav.Link eventKey="ascending" onSelect={this.sortEpisodes}>Lowest to Highest</Nav.Link></Nav.Item>
               <Nav.Item className="nav-item"><Nav.Link eventKey="descending" onSelect={this.sortEpisodes}>Highest to Lowest</Nav.Link></Nav.Item>
