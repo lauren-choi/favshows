@@ -9,10 +9,14 @@ export default class DisplayList extends React.Component {
     super(props);
   }
 
+  addActivity = (item) => {
+    this.props.addToAggregateList(item);
+  }
+
   render() {
     return (
       <div className="filtered-list">
-        {this.props.list.map(item => 
+        {this.props.activityList.map(item => 
         <Card className="filtered-item">
           <Card.Body>
             <Card.Title>{item.name}</Card.Title>
@@ -25,7 +29,7 @@ export default class DisplayList extends React.Component {
             <Card.Text>
               Intensity level: {item.intensity}
             </Card.Text>
-            <Button variant="primary">Add to list</Button>
+            <Button variant="primary" onClick={() => this.addActivity(item)}>Add to list</Button>
           </Card.Body>
         </Card>)}
       </div>

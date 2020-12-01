@@ -14,8 +14,6 @@ export default class FilteredList extends React.Component {
       type: "All",
       location: "All",
       sortState: "Select",
-      total: 0,
-      aggregate: []
     }
   }
 
@@ -76,22 +74,15 @@ export default class FilteredList extends React.Component {
   onSelectSorting = event => {
     this.setState({
       sortState: event
-    })
+    });
+    if (event === "descending") {
+      this.props.sortDescending();
+    } else if (event === "ascending") {
+      this.props.sortAscending();
+    } else {
+      this.props.resetList();
+    }
   };
-
-  addToAggregate = item => {
-    let filteredArray = this.state.aggregate.concat(item)
-    this.setState({
-      aggregate: filteredArray
-    });
-  }
-
-  removeFromAggregate = elt => {
-    let filteredArray = this.state.aggregate.filter(item => item !== elt.target.value)
-    this.setState({
-      aggregate: filteredArray
-    });
-  }
 
   render() {
     return (
@@ -114,16 +105,16 @@ export default class FilteredList extends React.Component {
             </Nav.Item>
             <h4>Sort by</h4>
             <Nav.Item className="navigation-category">
+              <Nav.Link eventKey="Select" onSelect={this.onSelectSorting}>Select</Nav.Link>
               <Nav.Link eventKey="ascending" onSelect={this.onSelectSorting}>Lowest to Highest</Nav.Link>
               <Nav.Link eventKey="descending" onSelect={this.onSelectSorting}>Highest to Lowest</Nav.Link>
             </Nav.Item>
           </Nav>
           <div className="filtered-section">
             <h4>Activities</h4>
-            <DisplayList list={this.props.list.filter(this.applyFilters)}/>
+            <DisplayList activityList={this.props.activityList.filter(this.applyFilters)} addToAggregateList={this.props.addToAggregateList} />
           </div>
         </div>
-        <AggregateList list={this.state.aggregate} />
       </div>
     );
   }

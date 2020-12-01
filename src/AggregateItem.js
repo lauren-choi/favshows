@@ -11,15 +11,13 @@ export default class AggregateItem extends React.Component {
     this.state = {
       hours: 0
     }
-    this.onSelectIncrease = this.onSelectIncrease.bind(this);
-    this.onSelectDecrease = this.onSelectDecrease.bind(this);
   }
 
   onSelectIncrease = event => {
     this.setState({
       hours: this.state.hours + 1
     });
-    this.props.addTotal();
+    this.props.addToTotal(1);
   }
 
   onSelectDecrease = event => {
@@ -27,7 +25,7 @@ export default class AggregateItem extends React.Component {
       this.setState({
         hours: this.state.hours - 1
       });
-      this.props.subtractTotal();
+      this.props.subtractFromTotal(1);
     }
   }
 
@@ -51,7 +49,7 @@ export default class AggregateItem extends React.Component {
                 <Card.Text className="count">{this.state.hours}</Card.Text>
               <Button variant="outline-secondary" onClick={() => this.onSelectIncrease()}>+</Button>
             </ButtonToolbar>
-            <Button variant="primary">Remove from list</Button>
+            <Button variant="primary" onClick={() => this.props.removeItem(this.props.item, this.state.hours)}>Remove from list</Button>
           </Card.Body>
         </Card>
       </div>
