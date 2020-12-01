@@ -75,7 +75,7 @@ export default class App extends React.Component {
 
 const activityList = [
   { name: "sleeping", type: "physical", location: "indoors", intensity: 1} ,
-  { name: "meditating", type: "mental", location: "both", intensity: 1 },
+  { name: "meditating", type: "mental", location: "indoors", intensity: 1 },
   { name: "yoga", type: "physical", location: "both", intensity: 2 },
   { name: "breathing exercises", type: "mental", location: "both", intensity: 1 },
   { name: "journaling", type: "mental", location: "both", intensity: 1 },
@@ -85,7 +85,7 @@ const activityList = [
   { name: "arts and crafts", type: "physical", location: "indoors", intensity: 2 },
   { name: "listening to music", type: "physical", location: "indoors", intensity: 2 },
   { name: "socializing", type: "physical", location: "both", intensity: 2 },
-  { name: "hiking", type: "physical", location: "outdoors", intensity: 3 },
+  { name: "stargazing", type: "mental", location: "outdoors", intensity: 1 },
 ];
 
 const aggregateList = [];
