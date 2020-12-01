@@ -8,7 +8,6 @@ export default class FilteredList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      episodes: "all",
       genre: "all",
       status: "all",
       episodesSort: "select",

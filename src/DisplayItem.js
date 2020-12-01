@@ -28,7 +28,7 @@ export default class AggregateItem extends React.Component {
             <Card.Text>
               Status: {this.props.item.status}
             </Card.Text>
-            <Button variant="primary" onClick={() => this.props.addActivity(this.props.item)}>Add to favorites</Button>
+            <Button variant="primary" onClick={() => this.props.addShow(this.props.item)}>Add to favorites</Button>
           </Card.Body>
         </Card>
       </div>

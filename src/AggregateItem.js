@@ -7,9 +7,6 @@ export default class AggregateItem extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      episodes: 0
-    }
   }
 
   render() {
@@ -31,7 +28,7 @@ export default class AggregateItem extends React.Component {
             <Card.Text>
               Status: {this.props.item.status}
             </Card.Text>
-            <Button variant="primary" onClick={() => this.props.removeItem(this.props.item)}>Remove from favorites</Button>
+            <Button variant="primary" onClick={() => this.props.removeShow(this.props.item)}>Remove from favorites</Button>
           </Card.Body>
         </Card>
       </div>

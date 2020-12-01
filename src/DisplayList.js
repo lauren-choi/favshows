@@ -8,15 +8,15 @@ export default class DisplayList extends React.Component {
     super(props);
   }
 
-  addActivity = (item) => {
+  addShow = (item) => {
     this.props.addToAggregateList(item);
     this.props.sumEpisodes();
   }
 
   render() {
     return (
-      <div className="filtered-list">
-        {this.props.showsList.map((item) => <DisplayItem item={item} addActivity={this.addActivity} />)}
+      <div className="display-list">
+        {this.props.showsList.map((item) => <DisplayItem item={item} addShow={this.addShow} />)}
       </div>
     );
   }

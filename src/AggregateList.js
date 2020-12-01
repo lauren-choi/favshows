@@ -8,7 +8,7 @@ export default class AggregateList extends React.Component {
     super(props);
   }
 
-  removeItem = (item) => {
+  removeShow = (item) => {
     this.props.removeFromAggregateList(item);
     this.props.sumEpisodes();
   }
@@ -20,7 +20,7 @@ export default class AggregateList extends React.Component {
         <h5>Total episodes: {this.props.total}</h5>
         <div className="aggregate-list">
           {this.props.aggregateList.map((val) => <AggregateItem item={val} 
-          subtractFromTotal={this.subtractFromTotal} addToTotal={this.addToTotal} removeItem={this.removeItem} />)}
+          subtractFromTotal={this.subtractFromTotal} addToTotal={this.addToTotal} removeShow={this.removeShow} />)}
         </div>
       </div>
     );
