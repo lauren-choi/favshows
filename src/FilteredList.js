@@ -113,7 +113,7 @@ export default class FilteredList extends React.Component {
             </Nav>
           </div>
           <div className="filtered-section">
-            <h4>Activities</h4>
+            <h4>All TV Shows</h4>
             <DisplayList addEpisodes={this.props.addEpisodes} showsList={this.props.showsList.filter(this.applyFilters)} 
             addToAggregateList={this.props.addToAggregateList} sumEpisodes={this.props.sumEpisodes}/>
           </div>
